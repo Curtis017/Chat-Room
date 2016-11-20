@@ -25,8 +25,9 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script type="text/javascript">
+
   var name = prompt("Enter a value", "Loser");
-  var socket = io();
+  var socket = io('', {query: "name=" + name});
 
   $('form').submit(function(){
     $('#messages').append($('<li>').text(name + ": " + $('#m').val()));

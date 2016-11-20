@@ -8,10 +8,13 @@ app.get('/', function(request, response){
 });
 
 io.on('connection', function (socket) {
-  console.log('User has joined the connection!');
+  var user = socket.handshake.query.name;
+  console.log(user + " has joined the connection!");
+  socket.broadcast.emit('message', {name: user, message: " joined the chat!"});
 
   socket.on('disconnect', function(){
     console.log("User has left the connection!");
+    socket.broadcast.emit('message', {name: user, message: " has left the chat!"});
   });
 
   socket.on('message', function(data){
